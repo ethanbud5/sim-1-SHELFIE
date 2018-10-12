@@ -22,6 +22,14 @@ class EditCard extends React.Component{
             this.setState({item:res.data[0]})
         })
     }
+    componentDidUpdate(prevProps,newState){
+        //console.log(prevProps,"-----",newState)
+        if(newState.item!==this.state.item){
+            axios.put("/api/item",this.state.item).then(res=>{
+                //this.props.history.goBack();
+           }).catch(err=>alert(err))
+        }
+    }
     updateItem(){
         axios.put("/api/item",this.state.item).then(res=>{
              this.props.history.goBack();
@@ -58,8 +66,8 @@ class EditCard extends React.Component{
                     </div>
                 </div>
                 <div className="btn_container">
-                    <button onClick={this.updateItem}>Update</button>
-                    <button onClick={()=>this.props.history.goBack()}>Cancel</button>
+                    {/* <button onClick={this.updateItem}>Update</button> */}
+                    <button onClick={()=>this.props.history.goBack()}>Back</button>
                     <button onClick={this.deleteItem}>Delete</button>
                 </div>
             </div>

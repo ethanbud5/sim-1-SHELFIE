@@ -15,6 +15,8 @@ massive(process.env.CONNECTION_STRING).then(dbInstance=>{
     app.set("db",dbInstance)
 }).catch(err=>console.log(err));
 
+app.use(express.static(__dirname + './../build'));
+
 app.get("/api/inventory",getAll);
 app.get("/api/items/:id",getOne);
 app.post("/api/item",addItem);
